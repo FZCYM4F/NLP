@@ -1,0 +1,167 @@
+######################################################################
+#
+# (c) Copyright University of Southampton, 2024
+#
+# Copyright in this software belongs to University of Southampton,
+# Highfield, University Road, Southampton SO17 1BJ
+#
+# Created By : Jennifer Williams
+# Created Date : 2025/01/24
+# Project : Teaching
+# Restriction: Content for internal use at University of Southampton only
+#
+######################################################################
+
+#
+# Regex lab for NLP teaching modules (COMP3225, COMP6253)
+# This lab will explore regex for various tasks (recognising lexical and numerical tokens, using lookahead and look behind, and analysing text)
+# Lab needs to be run on a machine where a Python conda environment can be installed. It has been tested with the ECS teaching lab machines.
+#
+
+#
+# Resources for further reading
+#
+# Online tools to develop your regex skills (with and without Python)
+# https://www.debuggex.com/
+# http://regexr.com/
+# https://regex101.com/
+# http://pythex.org/
+#
+
+
+#
+# linux install https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
+# Windows WSL (Windows subsystem linux)
+#     iSolutions page on WSL install https://sotonproduction.service-now.com/serviceportal?id=kb_article_view&sys_kb_id=49ae16091b103b00cdde86abee4bcb37
+#     must have admin rights to do this
+#     control panel -> turn windows features on or off->WSL = on
+#     search -> microsoft store -> install Ubuntu
+# ECS lab machines have WSL enabled by default but need Ubuntu installed
+#     open powershell
+#     wsl --set-default-version 2
+#     wsl --update
+#     wsl --install -d Ubuntu
+# windows native (not recommended or supported) https://docs.conda.io/en/latest/miniconda.html
+#
+
+###########################
+# WSL Installation Instructions for ECS teaching lab machines (including cuda for WSL)
+#
+
+#  open powershell
+wsl --set-default-version 2
+wsl --update # ECS machines have WSL already (do ignore this command)
+wsl --install -d Ubuntu
+
+###########################
+# install conda
+#
+
+wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+chmod +x Anaconda3-2023.09-0-Linux-x86_64.sh
+
+# install anaconda to default /home/<user>/anaconda3
+./Anaconda3-2023.09-0-Linux-x86_64.sh
+conda list
+
+#
+# Setup a conda environment
+#
+
+# create env in conda
+conda create --yes --use-local -n nlp_labs python=3.9 -y
+conda init bash
+conda config --set auto_activate_base false
+conda activate nlp_labs
+conda deactivate
+
+# ubuntu update so it can find latest pip server URIs
+# for WSL updates use powershell 'wsl --update' command
+conda activate nlp_labs
+sudo apt-get update
+sudo apt -y purge python3-pip
+sudo python3 -m pip uninstall pip
+sudo apt -y install python3-pip --fix-missing
+
+# check your python version in conda (should be 3.9 for this lab)
+python3 -V
+
+
+
+###########################
+# Install lab
+#
+
+# make your lab workdir (in this example its /data/alpaca_lora_lab)
+
+sudo mkdir /data/
+sudo chown sem03 /data/
+mkdir /data/regex_lab
+cd /data/regex_lab
+
+# copy lab files regex_lab.zip file to workdir using SCP or similar
+# in wsl use a mount to access the c drive
+cp '/mnt/c/Users/sem03/lab/regex_lab_package.zip' /data/regex_lab
+
+conda activate nlp_labs
+cd /data/regex_lab
+sudo apt install unzip
+unzip regex_lab_package.zip
+
+# install python libs (for pytorch 2.2.0) for this lab
+cd /data/regex_lab/regex_lab_package
+python3 -m pip install -r regex-requirements.txt
+python3
+	>> import nltk
+	>> nltk.download()
+		d
+		stopwords
+		d
+		punkt
+		q
+	>> exit()
+python3 -m pip list
+
+
+############################################
+# Introduction: regex capabilities
+#
+
+python3 regex_capabilities.py
+
+
+##############################################
+# TASK #1 and #2 - recognizing lexical and numerical tokens
+#
+
+python3 regex_recognising_tokens.py
+
+
+############################################
+# TASK #3 - regex lookahead and look behind
+# (LAB SIGNOFF) show screen shot of the regex and results
+#
+
+python3 regex_lookahead_lookbehind.py
+
+
+############################################
+# Optional TASK #4 - regex analysing jokes
+#
+
+python3 regex_analyse_jokes.py
+
+
+############################################
+# Optional TASK #5 - regex citations
+#
+
+python3 regex_citations.py
+
+
+############################################
+# Optional TASK #6 - regex ELIZA conversation bot
+#
+
+python3 regex_ELIZA.py
+
