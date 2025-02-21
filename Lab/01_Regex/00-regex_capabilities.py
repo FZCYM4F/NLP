@@ -35,14 +35,14 @@ if re.search("term[5-9]",  text):
 # Now we've seen that re.search() will take the pattern, scan the text, and then returns a Match object corresponding to the first match.
 # If no pattern is found, a None is returned. Both of these are truthy, so any successful match (even a match on a null string from an ill-advised Kleene *) will evaluate to True in a Boolean context. 
 
-match = re.search("\d+",  "This is the COMP3225 module's 1st lab")
+match = re.search(r"\d+",  "This is the COMP3225 module's 1st lab")
 
 print("The regexp matched '%s' between positions %s and %s" % (match.group(0), match.start(), match.end()))
 
 
 # If you used capture groups in the regular expression, they will appear as arguments 1 up to 99 of the match.groups() method. 
 
-match = re.search("(\d+).*(\d+)",  "This is the COMP3225 module's 1st lab")
+match = re.search(r"(\d+).*(\d+)",  "This is the COMP3225 module's 1st lab")
 
 print("The regexp matched '%s' and '%s'" % (match.group(1), match.group(2)))
 
@@ -54,17 +54,17 @@ print("The regexp matched '%s' and '%s'" % (match.group(1), match.group(2)))
 #    re.findall() return all matches
 #
 #You can also look for all the matches in a string with re.findall(), but it returns a list of the actual strings matched rather than a Match object.
-match = re.findall("\d+",  "This is the COMP3225 module's 1st lab")
+match = re.findall(r"\d+",  "This is the COMP3225 module's 1st lab")
 print("The regexp matched '%s'" % (match))
 
 
 # To embed this in a file-read-and-match-print-results code fragment that works line by line, we can do the following.
 # We are using the codecs package to explicitly manage the various character sets that we might encounter. 
 
-fname="../../corpus/comp3225/mytest.txt"
+fname="mytest.txt"
 
 for line in codecs.open(fname,"r",encoding="utf-8"):
-    match=re.findall("\d+", line)
+    match=re.findall(r"\d+", line)
     if match: print(match)
 
 
