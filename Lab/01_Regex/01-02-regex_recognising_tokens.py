@@ -1,7 +1,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-######################################################################
+############################################################################################################################################
 #
 # (c) Copyright University of Southampton, 2024
 #
@@ -13,8 +13,9 @@
 # Project : Teaching
 # Restriction: Content for internal use at University of Southampton only
 #
-######################################################################
-
+############################################################################################################################################
+print("\n")
+print("###############################  TASK 1  #######################################\n")
 # TASK 1:
 # Recognise the following particular kinds of non-word lexical tokens,
 #   using your experience to define the allowable format of each token type.
@@ -72,19 +73,22 @@ for line in codecs.open(fname,"r",encoding="utf-8"):
                 "username":m.group(1),
                 "internet domain":m.group(2)})
 
-print("----------------------------------------Hashtags:----------------------------------------")
+print("----------------------------------------Hashtags:----------------------------------------\n")
 print("\n".join(hashtags_list))
-print("----------------------------------------Postcodes:----------------------------------------")
+print("\n")
+print("----------------------------------------Postcodes:----------------------------------------\n")
 print("\n".join(postcodes_list))
-print("----------------------------------------Phone numbers:----------------------------------------")
+print("\n")
+print("----------------------------------------Phone numbers:----------------------------------------\n")
 print("\n".join(phone_numbers_list))
-print("----------------------------------------URLs:----------------------------------------")
+print("\n")
+print("----------------------------------------URLs:----------------------------------------\n")
 print("\n".join(urls_list))
-print("----------------------------------------Emails:----------------------------------------")
-print("\n".join([f"{email['email']} (User: {email['username']}, Domain: {email['internet domain']})" for email in emails_list]))
+print("\n")
+print("----------------------------------------Emails:----------------------------------------\n")
+print("\n".join([f"{email['email']}      (User: {email['username']}, Domain: {email['internet domain']})" for email in emails_list]))
+print("\n")
 #etc
-
-
 
 
 # If that was too easy for you, look up the rules for the officially allowable formats of each token type in Wikipedia. Here for example, are the official UK postcode formats:
@@ -97,37 +101,161 @@ print("\n".join([f"{email['email']} (User: {email['username']}, Domain: {email['
 
 # The rules for email adddresses are eye-watering!
 
-
-
+############################################################################################################################################
+print("###############################  TASK 2  #######################################\n")
 # TASK 2:
 #
-# The zip file guardian.zip (../corpus/guardian.zip) contains the text extracted from 118 Guardian news stories from the last year about Southampton, Portsmouth and Winchester. (One story per UTF-8 file, but you might like to combine them into a single file for ease of processing.) Starting from the regexp tokenizer example in Fig 2.12 (reproduced below), extend the set of tokens recognised to capture the following types of numeric data.
-#- Numbers: -12  47.2  74,832,101
-#- Time: 09:17pm
-#- Money: £27.8m £8bn
-#- Length: 6ft 48cm
-#- Phone: +44(0)2380594479
-#- Age specification: 13-year-old
-#- Percentage: 14.4%
-#- Temperature: 28C
-#- Ordinals: 48th 22nd 1st
+# The zip file guardian.zip (../corpus/guardian.zip) contains the text extracted from
+#   118 Guardian news stories from the last year about Southampton, Portsmouth and Winchester.
+#   (One story per UTF-8 file, but you might like to combine them into a single file for ease of processing.)
+#   Starting from the regexp tokenizer example in Fig 2.12 (reproduced below), extend the set of tokens recognised
+#   to capture the following types of numeric data.
+# - Numbers: -12  47.2  74,832,101
+# - Time: 09:17pm
+# - Money: £27.8m £8bn
+# - Length: 6ft 48cm
+# - Phone: +44(0)2380594479
+# - Age specification: 13-year-old
+# - Percentage: 14.4%
+# - Temperature: 28C
+# - Ordinals: 48th 22nd 1st
 # You can compare your results with this list of numeric tokens (../corpus/guardian-numerics.txt).
 #
-#What’s the biggest financial quantity that appears in these stories? What did it relate to? What are the most common numeric tokens, and why do they appear?
+# What’s the biggest financial quantity that appears in these stories? What did it relate to?
+# What are the most common numeric tokens, and why do they appear?
 
-text='That U.S.A. poster-print costs $12.40...'
 
-# The following pattern is reproduced from the textbook figure 2.12.
-# UNFORTUNATELY, the behaviour of NLTK has changed since version 3.1,
-# so that capture groups don't work any more and every set
-# of grouping parentheses () has now to explicitly declare non-capturing semantics with ?:
+
+# #################################### Extract zip file ############################################################
+# import os
+# import zipfile
+
+# zip_path = "guardian.zip"
+# with zipfile.ZipFile(zip_path, "r") as zip_ref:
+#     zip_ref.extractall(".")
+# # Read File
+# folder_path = "ARTICLES.d"
+# combined_file = "combined.txt"
+# with open(combined_file, "w", encoding="utf-8") as out_f:
+#     for filename in os.listdir(folder_path):
+#
+#         if filename.lower().endswith(".txt"):
+#             file_path = os.path.join(folder_path, filename)
+#
+#             with open(file_path, "r", encoding="utf-8") as f:
+#                 text = f.read()
+#                 out_f.write(text + "\n")  # combine the files
+####################################################################################################################
+
+
+#################################### Get numeric tokens ############################################################
+fname="combined.txt"
+
 pattern = r'''(?x)			# set flag to allow verbose regexps
-	 (?:[A-Z]\.)+			# abbreviations, e.g. U.S.A.
-	 | \w+(?:-\w+)*			# words with optional internal hyphens
-	 | \$?\d+(?:\.\d+)?%?	# currency and percentages, e.g. $12.40, 82%
-	 | \.\.\.				# ellipsis
-	 | [][.,;"'?():-_`]		# these are separate punctuation tokens; includes ], [
+	 (?:0[0-9]|1[0-9]|2[0-4]|(?<=\D)[0-9]):?.?[0-5][0-9]\s?[pPaA][mM]    # Time
+	 | [£$€¥]\d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?[mbMBKk]?[bn]?     # Money
+	 | \-?\d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?[mbMBKk]?[bn]?(?:cm|mm|m|km|in|ft|yd|mi|-metre)   # Length
+	 | (?:(?:\+44\s?(?:\(0\)|\(\d+\))\s?)\d+\s\d+(?:\s\d+)?)|(?:0\d+\s\d+(?:\s\d+)?)    # Phone
+	 | \d+-year-old|\d+\s(?:years old|yrs old|y/o)   # Age
+	 | \-?\d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?%      # Percentage
+	 | \-?\d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?\s?°?[CFK]    # Temperature
+	 | \d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?(?:st|nd|rd|th)      # Ordinals
+	 | \d{4}s    # Century
+	 | \d+(?:h|min|s)   # hour minute second
+	 | \-?\d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?      # numbers: -12 47.2 74,832,101
 	 '''
 
+with open(fname, "r", encoding="utf-8") as file:
+    text = file.read()
+
 tokens=nltk.regexp_tokenize(text, pattern)
-print(tokens)
+# print(tokens)
+fn = "Task02-tokens.txt"
+with open(fn, "w", encoding="utf-8") as file:
+    for item in tokens:
+        file.write(item + "\n")
+###############################################################################################################
+
+
+############################## Find the biggest financial quantity #############################################
+print("---------------------------------------- Question 1: ----------------------------------------\n")
+financial_quantity = []
+for token in tokens:
+    if re.match(r"[£$€¥]\d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?[mbMBKk]?[bn]?", token):
+        financial_quantity.append(token)
+# print(financial_quantity)
+
+def money_to_float(money_str):
+
+    # remove currency sign
+    match = re.match(r"[£$€¥]?(\d+(?:,?(?:\d{3},)*\d{3})?(?:\.\d+)?)([mbMBKk]?[bn]?)", money_str)
+
+    # print(match.group(0))
+    if not match:
+        return 0  # 没有匹配到金额格式，返回 0
+
+    num_str= match.group(1)
+    unit = match.group(2)
+    unit = unit if unit else ""
+
+    # remove ","
+    num_str = num_str.replace(",","")
+    num = float(num_str)
+
+    # Calculate
+    if unit.lower() == "k":
+        result = num * 1e3
+    if unit.lower() == "m":
+        result= num * 1e6
+    if unit.lower()in ["b","bn"]:
+        result= num * 1e9
+    else:
+        result= num
+    return result
+
+
+# Find the biggest financial quantity
+max_money = max(financial_quantity, key=money_to_float)
+print("The biggest financial quantity is: ", max_money)
+print("\n")
+
+# Find the position of the max_money in the text
+file_name="combined.txt"
+with open(file_name, "r", encoding="utf-8") as file:
+    text = file.read()
+
+sentences = re.findall(r"([^.]*?" + re.escape(max_money) + r"[^.]*\.)", text, re.IGNORECASE)
+print(f"The sentence it appears in the text is: {sentences}\n")
+###############################################################################################################
+
+
+##################################### Find the most common numeric tokens #####################################
+print("---------------------------------------- Question 2: ----------------------------------------")
+import collections
+
+token_counts = collections.Counter(tokens)
+
+most_common_tokens = token_counts.most_common(10)
+
+print("\nMost Common Numeric Tokens:")
+for token, count in most_common_tokens:
+    print(f"{token}: {count} times")
+print("\"-19\" appears the most, because Covid-19 was a hot topic in those years.")
+###############################################################################################################
+
+
+# text='That U.S.A. poster-print costs $12.40...'
+#
+# # The following pattern is reproduced from the textbook figure 2.12.
+# # UNFORTUNATELY, the behaviour of NLTK has changed since version 3.1,
+# # so that capture groups don't work any more and every set of grouping parentheses () has now to explicitly declare non-capturing semantics with ?:
+# pattern = r'''(?x)			# set flag to allow verbose regexps
+# 	 (?:[A-Z]\.)+			# abbreviations, e.g. U.S.A.
+# 	 | \w+(?:-\w+)*			# words with optional internal hyphens
+# 	 | \$?\d+(?:\.\d+)?%?	# currency and percentages, e.g. $12.40, 82%
+# 	 | \.\.\.				# ellipsis
+# 	 | [][.,;"'?():-_`]		# these are separate punctuation tokens; includes ], [
+# 	 '''
+#
+# tokens=nltk.regexp_tokenize(text, pattern)
+# print(tokens)
