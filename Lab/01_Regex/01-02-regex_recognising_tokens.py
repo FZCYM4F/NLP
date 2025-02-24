@@ -127,24 +127,24 @@ print("###############################  TASK 2  ################################
 
 
 # #################################### Extract zip file ############################################################
-# import os
-# import zipfile
+import os
+import zipfile
 
-# zip_path = "guardian.zip"
-# with zipfile.ZipFile(zip_path, "r") as zip_ref:
-#     zip_ref.extractall(".")
-# # Read File
-# folder_path = "ARTICLES.d"
-# combined_file = "combined.txt"
-# with open(combined_file, "w", encoding="utf-8") as out_f:
-#     for filename in os.listdir(folder_path):
-#
-#         if filename.lower().endswith(".txt"):
-#             file_path = os.path.join(folder_path, filename)
-#
-#             with open(file_path, "r", encoding="utf-8") as f:
-#                 text = f.read()
-#                 out_f.write(text + "\n")  # combine the files
+zip_path = "guardian.zip"
+with zipfile.ZipFile(zip_path, "r") as zip_ref:
+    zip_ref.extractall(".")
+# Read File
+folder_path = "ARTICLES.d"
+combined_file = "combined.txt"
+with open(combined_file, "w", encoding="utf-8") as out_f:
+    for filename in os.listdir(folder_path):
+
+        if filename.lower().endswith(".txt"):
+            file_path = os.path.join(folder_path, filename)
+
+            with open(file_path, "r", encoding="utf-8") as f:
+                text = f.read()
+                out_f.write(text + "\n")  # combine the files
 ####################################################################################################################
 
 
