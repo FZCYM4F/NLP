@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbdfc030-7556-498d-b711-cb512a418ae9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/NLP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NLP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cbdfc030-7556-498d-b711-cb512a418ae9" name="Changes" comment="task03_Done">
+      <change afterPath="$PROJECT_DIR$/Lab/02_/MyPractive.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/01_Regex/01-02-regex_recognising_tokens.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/01_Regex/01-02-regex_recognising_tokens.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Lab/01_Regex/03-regex_lookahead_lookbehind.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/01_Regex/03-regex_lookahead_lookbehind.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/01_Regex/MyPractice.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/01_Regex/MyPractice.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +41,12 @@
     &quot;assignee&quot;: &quot;FZCYM4F&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/FZCYM4F/NLP.git&quot;,
-    &quot;accountId&quot;: &quot;b1dccefc-5d03-418d-bba8-94e45cdf34d8&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/FZCYM4F/NLP.git",
+    "accountId": "82694459-7a5e-443e-a994-06d999d55f29"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -69,7 +66,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "F:/Master_Sem02/NLP/Lab/01_Regex/guardian_extracted",
+    "last_opened_file_path": "D:/Master-Sem01/Research_project/NLP",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -205,16 +202,31 @@
       <workItem from="1738940668524" duration="10000" />
       <workItem from="1739971674652" duration="21336000" />
       <workItem from="1740311012779" duration="29175000" />
+      <workItem from="1740497916876" duration="24000" />
+      <workItem from="1740673766620" duration="323000" />
     </task>
+    <task id="LOCAL-00001" summary="task03_Done">
+      <option name="closed" value="true" />
+      <created>1740409693869</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1740409693869</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="task03_Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="task03_Done" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NLP$01_02_regex_recognising_tokens.coverage" NAME="01-02-regex_recognising_tokens 覆盖结果" MODIFIED="1740402913258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab/01_Regex" />
     <SUITE FILE_PATH="coverage/NLP$regex_citations.coverage" NAME="regex_citations 覆盖结果" MODIFIED="1739971846766" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab/01_Regex" />
     <SUITE FILE_PATH="coverage/NLP$00_regex_capabilities.coverage" NAME="00-regex_capabilities 覆盖结果" MODIFIED="1740311805812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab/01_Regex" />
-    <SUITE FILE_PATH="coverage/NLP$03_regex_lookahead_lookbehind.coverage" NAME="03-regex_lookahead_lookbehind 覆盖结果" MODIFIED="1740409624282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab/01_Regex" />
+    <SUITE FILE_PATH="coverage/NLP$03_regex_lookahead_lookbehind.coverage" NAME="03-regex_lookahead_lookbehind 覆盖结果" MODIFIED="1740417021991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab/01_Regex" />
   </component>
 </project>

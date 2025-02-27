@@ -31,13 +31,14 @@
 #                                            and the next character is uppercase
 #
 
-
+########################################################################################################################
 # Determine which Python libraries you must import
 import re
 
 # Write your code here
 
-# Password Check
+################################################# Password Check #######################################################
+print("\n")
 passwords = [
     # Valid Passwords:
     "XyZ12!@#", "SecureP@ss77!$", "Tricky#99Aa!", "hH1!hH2!!",
@@ -53,22 +54,22 @@ Pattern_1 = r"^(?=(?:.*[A-Z]){2,})(?=(?:.*[0-9]){2,})(?=(?:.*\W){2,}).{6,}$"
 # It can't start with AB, ab, 01 or 12
 Pattern_2 = r"^(?!(?:ab|AB|01|12)).{6,}$"
 
-
 Valid_Password1 = []
 Valid_Password2 = []
 for psw in passwords:
     match1 = re.fullmatch(Pattern_1, psw)
     if match1:
         Valid_Password1.append(match1.group())
-print(Valid_Password1)
-
+# print(Valid_Password1)
 for psw in Valid_Password1:
     match2 = re.fullmatch(Pattern_2, psw)
     if match2:
         Valid_Password2.append(match2.group())
-print(Valid_Password2)
+print(f"The valid passwords are: {Valid_Password2}\n")
 
-# Separate CamelCase Word
+########################################################################################################################
+
+############################################# Separate CamelCase Word ##################################################
 
 CamelCase_Test = [
 "getElementById", "parseHTTPRequest", "convertToJSON",
@@ -82,6 +83,4 @@ for word in CamelCase_Test:
     print(word)
     print(match3)
 
-#
-# (LAB SIGNOFF) show screen shot of the regex and results
-#
+#############################################################################################################################
