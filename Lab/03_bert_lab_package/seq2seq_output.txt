@@ -1,0 +1,429 @@
+(nlp_labs_BERT) F:\Master_Sem02\NLP\Lab\03_bert_lab_package\bert_lab_package>python bert_seq2seq_generation.py
+cuda PYTORCH_CUDA_ALLOC_CONF =  garbage_collection_threshold:0.6,max_split_size_mb:256
+cuda memory (free  0 ; reserved  0 ; allocated  0 )
+device used = cuda
+D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\huggingface_hub\file_download.py:943: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+example train_data[0] = {'article': 'LONDON, England (Reuters) -- Harry Potter star Daniel Radcliffe gains access to a reported £20 million ($41.1 million) fortune as he turns 18 on Monday, but he insists the money won\'t cast a spell on him. Daniel Radcliffe as Harry Potter in "Harry Potter and the Order of the Phoenix" To the disappointment of gossip columnists around the world, the young actor says he has no plans to fritter his cash away on fast cars, drink and celebrity parties. "I don\'t plan to be one of those people who, as soon as they turn 18, suddenly buy themselves a massive sports car collection or something similar," he told an Australian interviewer earlier this month. "I don\'t think I\'ll be particularly extravagant. "The things I like buying are things that cost about 10 pounds -- books and CDs and DVDs." At 18, Radcliffe will be able to gamble in a casino, buy a drink in a pub or see the horror film "Hostel: Part II," currently six places below his number one movie on the UK box office chart. Details of how he\'ll mark his landmark birthday are under wraps. His agent and publicist had no comment on his plans. "I\'ll definitely have some sort of party," he said in an interview. "Hopefully none of you will be reading about it." Radcliffe\'s earnings from the first five Potter films have been held in a trust fund which he has not been able to touch. Despite his growing fame and riches, the actor says he is keeping his feet firmly on the ground. "People are always looking to say \'kid star goes off the rails,\'" he told reporters last month. "But I try very hard not to go that way because it would be too easy for them." His latest outing as the boy wizard in "Harry Potter and the Order of the Phoenix" is breaking records on both sides of the Atlantic and he will reprise the role in the last two films.  Watch I-Reporter give her review of Potter\'s latest » . There is life beyond Potter, however. The Londoner has filmed a TV movie called "My Boy Jack," about author Rudyard Kipling and his son, due for release later this year. He will also appear in "December Boys," an Australian film about four boys who escape an orphanage. Earlier this year, he made his stage debut playing a tortured teenager in Peter Shaffer\'s "Equus." Meanwhile, he is braced for even closer media scrutiny now that he\'s legally an adult: "I just think I\'m going to be more sort of fair game," he told Reuters. E-mail to a friend . Copyright 2007 Reuters. All rights reserved.This material may not be published, broadcast, rewritten, or redistributed.', 'highlights': "Harry Potter star Daniel Radcliffe gets £20M fortune as he turns 18 Monday .\nYoung actor says he has no plans to fritter his cash away .\nRadcliffe's earnings from first five Potter films have been held in trust fund .", 'id': '42c027e4ff9730fbb3de84c1af0d2c506e41c3e4'}
+train_data size = 2871
+Map: 100%|█████████████████████████████████████████████████████████████████| 2871/2871 [00:30<00:00, 93.09 examples/s]
+val_data size = 134
+Map: 100%|███████████████████████████████████████████████████████████████████| 134/134 [00:01<00:00, 96.43 examples/s]
+pred (tensor) = {'input_ids': tensor([[  101,  2023,  2003,  1037, 10173,  4539,  6251,  1012,   102,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0]])}
+gold (tensor) = {'input_ids': tensor([[ 101, 2070, 2060, 2751, 4539, 6251, 1012,  102,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+            0,    0,    0,    0,    0,    0,    0,    0]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0]])}
+pred (batch tensors) = tensor([[  101,  2023,  2003,  1037, 10173,  4539,  6251,  1012,   102,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0]])
+gold (batch tensors) = tensor([[  101,  2023,  2003,  1037, 10173,  4539,  6251,  1012,   102,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+             0,     0,     0,     0,     0,     0,     0,     0]])
+rouge report = {'rouge1': 0.3636363636363636, 'rouge2': 0.22222222222222224, 'rougeL': 0.3636363636363636, 'rougeLsum': 0.3636363636363636}
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.seq_relationship.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertLMHeadModel: ['cls.seq_relationship.weight', 'cls.seq_relationship.bias']
+- This IS expected if you are initializing BertLMHeadModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertLMHeadModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertLMHeadModel were not initialized from the model checkpoint at bert-base-uncased and are newly initialized: ['bert.encoder.layer.0.crossattention.self.value.bias', 'bert.encoder.layer.6.crossattention.self.key.bias', 'bert.encoder.layer.7.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.1.crossattention.output.dense.weight', 'bert.encoder.layer.9.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.1.crossattention.self.query.weight', 'bert.encoder.layer.5.crossattention.self.value.bias', 'bert.encoder.layer.7.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.10.crossattention.output.dense.weight', 'bert.encoder.layer.5.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.10.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.6.crossattention.self.key.weight', 'bert.encoder.layer.4.crossattention.self.query.weight', 'bert.encoder.layer.4.crossattention.output.dense.weight', 'bert.encoder.layer.2.crossattention.self.query.bias', 'bert.encoder.layer.6.crossattention.self.value.weight', 'bert.encoder.layer.7.crossattention.self.query.weight', 'bert.encoder.layer.0.crossattention.output.dense.weight', 'bert.encoder.layer.11.crossattention.self.value.bias', 'bert.encoder.layer.10.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.1.crossattention.self.key.bias', 'bert.encoder.layer.5.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.10.crossattention.output.dense.bias', 'bert.encoder.layer.8.crossattention.output.dense.bias', 'bert.encoder.layer.11.crossattention.output.dense.bias', 'bert.encoder.layer.4.crossattention.output.dense.bias', 'bert.encoder.layer.5.crossattention.output.dense.bias', 'bert.encoder.layer.0.crossattention.self.query.weight', 'bert.encoder.layer.0.crossattention.self.key.weight', 'bert.encoder.layer.5.crossattention.self.key.bias', 'bert.encoder.layer.0.crossattention.self.value.weight', 'bert.encoder.layer.5.crossattention.self.value.weight', 'bert.encoder.layer.3.crossattention.self.value.weight', 'bert.encoder.layer.6.crossattention.output.dense.weight', 'bert.encoder.layer.11.crossattention.self.query.weight', 'bert.encoder.layer.1.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.7.crossattention.self.key.weight', 'bert.encoder.layer.1.crossattention.self.value.bias', 'bert.encoder.layer.5.crossattention.self.query.weight', 'bert.encoder.layer.3.crossattention.self.query.weight', 'bert.encoder.layer.11.crossattention.self.query.bias', 'bert.encoder.layer.6.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.10.crossattention.self.value.bias', 'bert.encoder.layer.5.crossattention.self.query.bias', 'bert.encoder.layer.1.crossattention.self.query.bias', 'bert.encoder.layer.4.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.8.crossattention.self.query.bias', 'bert.encoder.layer.5.crossattention.self.key.weight', 'bert.encoder.layer.0.crossattention.self.query.bias', 'bert.encoder.layer.3.crossattention.output.dense.weight', 'bert.encoder.layer.10.crossattention.self.query.bias', 'bert.encoder.layer.9.crossattention.self.key.weight', 'bert.encoder.layer.11.crossattention.self.value.weight', 'bert.encoder.layer.6.crossattention.self.query.bias', 'bert.encoder.layer.2.crossattention.output.dense.bias', 'bert.encoder.layer.4.crossattention.self.value.bias', 'bert.encoder.layer.7.crossattention.output.dense.bias', 'bert.encoder.layer.10.crossattention.self.key.bias', 'bert.encoder.layer.0.crossattention.output.dense.bias', 'bert.encoder.layer.11.crossattention.self.key.bias', 'bert.encoder.layer.8.crossattention.output.dense.weight', 'bert.encoder.layer.7.crossattention.output.dense.weight', 'bert.encoder.layer.0.crossattention.self.key.bias', 'bert.encoder.layer.6.crossattention.output.dense.bias', 'bert.encoder.layer.4.crossattention.self.value.weight', 'bert.encoder.layer.9.crossattention.self.key.bias', 'bert.encoder.layer.11.crossattention.output.dense.weight', 'bert.encoder.layer.8.crossattention.self.value.bias', 'bert.encoder.layer.2.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.10.crossattention.self.query.weight', 'bert.encoder.layer.2.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.8.crossattention.self.query.weight', 'bert.encoder.layer.7.crossattention.self.value.bias', 'bert.encoder.layer.10.crossattention.self.value.weight', 'bert.encoder.layer.11.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.2.crossattention.self.key.bias', 'bert.encoder.layer.7.crossattention.self.value.weight', 'bert.encoder.layer.0.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.6.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.9.crossattention.output.dense.weight', 'bert.encoder.layer.0.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.1.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.2.crossattention.output.dense.weight', 'bert.encoder.layer.9.crossattention.self.value.bias', 'bert.encoder.layer.11.crossattention.self.key.weight', 'bert.encoder.layer.2.crossattention.self.value.weight', 'bert.encoder.layer.3.crossattention.self.key.weight', 'bert.encoder.layer.3.crossattention.self.query.bias', 'bert.encoder.layer.3.crossattention.output.dense.bias', 'bert.encoder.layer.1.crossattention.self.key.weight', 'bert.encoder.layer.3.crossattention.self.key.bias', 'bert.encoder.layer.8.crossattention.self.key.weight', 'bert.encoder.layer.8.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.3.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.3.crossattention.self.value.bias', 'bert.encoder.layer.8.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.2.crossattention.self.query.weight', 'bert.encoder.layer.2.crossattention.self.key.weight', 'bert.encoder.layer.1.crossattention.self.value.weight', 'bert.encoder.layer.9.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.4.crossattention.self.query.bias', 'bert.encoder.layer.9.crossattention.self.value.weight', 'bert.encoder.layer.9.crossattention.output.dense.bias', 'bert.encoder.layer.2.crossattention.self.value.bias', 'bert.encoder.layer.3.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.4.crossattention.self.key.weight', 'bert.encoder.layer.9.crossattention.self.query.bias', 'bert.encoder.layer.9.crossattention.self.query.weight', 'bert.encoder.layer.7.crossattention.self.key.bias', 'bert.encoder.layer.11.crossattention.output.LayerNorm.bias', 'bert.encoder.layer.7.crossattention.self.query.bias', 'bert.encoder.layer.10.crossattention.self.key.weight', 'bert.encoder.layer.4.crossattention.self.key.bias', 'bert.encoder.layer.6.crossattention.self.value.bias', 'bert.encoder.layer.5.crossattention.output.dense.weight', 'bert.encoder.layer.8.crossattention.self.value.weight', 'bert.encoder.layer.8.crossattention.self.key.bias', 'bert.encoder.layer.6.crossattention.self.query.weight', 'bert.encoder.layer.4.crossattention.output.LayerNorm.weight', 'bert.encoder.layer.1.crossattention.output.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+
+model architecture (BERT encoder/decoder model):
+EncoderDecoderModel(
+  (encoder): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (decoder): BertLMHeadModel(
+    (bert): BertModel(
+      (embeddings): BertEmbeddings(
+        (word_embeddings): Embedding(30522, 768, padding_idx=0)
+        (position_embeddings): Embedding(512, 768)
+        (token_type_embeddings): Embedding(2, 768)
+        (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+        (dropout): Dropout(p=0.1, inplace=False)
+      )
+      (encoder): BertEncoder(
+        (layer): ModuleList(
+          (0-11): 12 x BertLayer(
+            (attention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+            )
+            (crossattention): BertAttention(
+              (self): BertSelfAttention(
+                (query): Linear(in_features=768, out_features=768, bias=True)
+                (key): Linear(in_features=768, out_features=768, bias=True)
+                (value): Linear(in_features=768, out_features=768, bias=True)
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+              (output): BertSelfOutput(
+                (dense): Linear(in_features=768, out_features=768, bias=True)
+                (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+                (dropout): Dropout(p=0.1, inplace=False)
+              )
+            )
+            (intermediate): BertIntermediate(
+              (dense): Linear(in_features=768, out_features=3072, bias=True)
+              (intermediate_act_fn): GELUActivation()
+            )
+            (output): BertOutput(
+              (dense): Linear(in_features=3072, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+      )
+    )
+    (cls): BertOnlyMLMHead(
+      (predictions): BertLMPredictionHead(
+        (transform): BertPredictionHeadTransform(
+          (dense): Linear(in_features=768, out_features=768, bias=True)
+          (transform_act_fn): GELUActivation()
+          (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+        )
+        (decoder): Linear(in_features=768, out_features=30522, bias=True)
+      )
+    )
+  )
+)
+
+
+model config (BERT encoder/decoder model):
+EncoderDecoderConfig {
+  "_commit_hash": null,
+  "decoder": {
+    "_name_or_path": "bert-base-uncased",
+    "add_cross_attention": true,
+    "architectures": [
+      "BertForMaskedLM"
+    ],
+    "attention_probs_dropout_prob": 0.1,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "chunk_size_feed_forward": 0,
+    "classifier_dropout": null,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": null,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "gradient_checkpointing": false,
+    "hidden_act": "gelu",
+    "hidden_dropout_prob": 0.1,
+    "hidden_size": 768,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "initializer_range": 0.02,
+    "intermediate_size": 3072,
+    "is_decoder": true,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "layer_norm_eps": 1e-12,
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "max_position_embeddings": 512,
+    "min_length": 0,
+    "model_type": "bert",
+    "no_repeat_ngram_size": 0,
+    "num_attention_heads": 12,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_hidden_layers": 12,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": 0,
+    "position_embedding_type": "absolute",
+    "prefix": null,
+    "problem_type": null,
+    "pruned_heads": {},
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": true,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": null,
+    "torchscript": false,
+    "transformers_version": "4.30.0",
+    "type_vocab_size": 2,
+    "typical_p": 1.0,
+    "use_bfloat16": false,
+    "use_cache": true,
+    "vocab_size": 30522
+  },
+  "decoder_start_token_id": 101,
+  "early_stopping": true,
+  "encoder": {
+    "_name_or_path": "bert-base-uncased",
+    "add_cross_attention": false,
+    "architectures": [
+      "BertForMaskedLM"
+    ],
+    "attention_probs_dropout_prob": 0.1,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "chunk_size_feed_forward": 0,
+    "classifier_dropout": null,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": null,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "gradient_checkpointing": false,
+    "hidden_act": "gelu",
+    "hidden_dropout_prob": 0.1,
+    "hidden_size": 768,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "initializer_range": 0.02,
+    "intermediate_size": 3072,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "layer_norm_eps": 1e-12,
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "max_position_embeddings": 512,
+    "min_length": 0,
+    "model_type": "bert",
+    "no_repeat_ngram_size": 0,
+    "num_attention_heads": 12,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_hidden_layers": 12,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": 0,
+    "position_embedding_type": "absolute",
+    "prefix": null,
+    "problem_type": null,
+    "pruned_heads": {},
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": true,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": null,
+    "torchscript": false,
+    "transformers_version": "4.30.0",
+    "type_vocab_size": 2,
+    "typical_p": 1.0,
+    "use_bfloat16": false,
+    "use_cache": true,
+    "vocab_size": 30522
+  },
+  "eos_token_id": 102,
+  "is_encoder_decoder": true,
+  "length_penalty": 2.0,
+  "max_length": 142,
+  "min_length": 56,
+  "model_type": "encoder-decoder",
+  "no_repeat_ngram_size": 3,
+  "num_beams": 4,
+  "pad_token_id": 0,
+  "transformers_version": null,
+  "vocab_size": 30522
+}
+
+
+
+model params (BERT encoder/decoder model) =  247363386
+D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\transformers\optimization.py:411: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+  0%|                                                                                         | 0/400 [00:00<?, ?it/s]You're using a BertTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\transformers\models\encoder_decoder\modeling_encoder_decoder.py:642: FutureWarning: Version v4.12.0 introduces a better way to train encoder-decoder models by computing the loss inside the encoder-decoder framework rather than in the decoder itself. You may observe training discrepancies if fine-tuning a model trained with versions anterior to 4.12.0. The decoder_input_ids are now created based on the labels, no need to pass them yourself anymore.
+  warnings.warn(DEPRECATION_WARNING, FutureWarning)
+{'loss': 7.5992, 'learning_rate': 3.8e-05, 'epoch': 0.03}
+{'loss': 6.7083, 'learning_rate': 2.5500000000000003e-05, 'epoch': 0.07}
+ 50%|███████████████████████████████████████▌                                       | 200/400 [02:21<02:24,  1.38it/s]D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\transformers\models\encoder_decoder\modeling_encoder_decoder.py:642: FutureWarning: Version v4.12.0 introduces a better way to train encoder-decoder models by computing the loss inside the encoder-decoder framework rather than in the decoder itself. You may observe training discrepancies if fine-tuning a model trained with versions anterior to 4.12.0. The decoder_input_ids are now created based on the labels, no need to pass them yourself anymore.
+  warnings.warn(DEPRECATION_WARNING, FutureWarning)
+{'loss': 6.2921, 'learning_rate': 1.3000000000000001e-05, 'epoch': 0.1}
+{'loss': 6.0962, 'learning_rate': 5.000000000000001e-07, 'epoch': 0.14}
+100%|███████████████████████████████████████████████████████████████████████████████| 400/400 [04:46<00:00,  1.51it/s]D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\transformers\generation\utils.py:1259: UserWarning: You have modified the pretrained model configuration to control generation. This is a deprecated strategy to control generation and will be removed soon, in a future version. Please use a generation configuration file (see https://huggingface.co/docs/transformers/main_classes/text_generation)
+  warnings.warn(
+{'eval_loss': 5.964268207550049, 'eval_rouge1': 0.07408174060213982, 'eval_rouge2': 0.004273616218016559, 'eval_rougeL': 0.05809042208272369, 'eval_rougeLsum': 0.058136546098128294, 'eval_runtime': 765.0678, 'eval_samples_per_second': 0.175, 'eval_steps_per_second': 0.175, 'epoch': 0.14}
+{'train_runtime': 1056.4521, 'train_samples_per_second': 0.379, 'train_steps_per_second': 0.379, 'train_loss': 6.673931579589844, 'epoch': 0.14}
+100%|███████████████████████████████████████████████████████████████████████████████| 400/400 [17:36<00:00,  2.64s/it]
+training report = TrainOutput(global_step=400, training_loss=6.673931579589844, metrics={'train_runtime': 1056.4521, 'train_samples_per_second': 0.379, 'train_steps_per_second': 0.379, 'train_loss': 6.673931579589844, 'epoch': 0.14})
+D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\transformers\models\encoder_decoder\modeling_encoder_decoder.py:642: FutureWarning: Version v4.12.0 introduces a better way to train encoder-decoder models by computing the loss inside the encoder-decoder framework rather than in the decoder itself. You may observe training discrepancies if fine-tuning a model trained with versions anterior to 4.12.0. The decoder_input_ids are now created based on the labels, no need to pass them yourself anymore.
+  warnings.warn(DEPRECATION_WARNING, FutureWarning)
+100%|███████████████████████████████████████████████████████████████████████████████| 134/134 [12:37<00:00,  5.65s/it]
+val report = {'eval_loss': 5.964268207550049, 'eval_rouge1': 0.07408174060213982, 'eval_rouge2': 0.004273616218016559, 'eval_rougeL': 0.05809042208272369, 'eval_rougeLsum': 0.058136546098128294, 'eval_runtime': 765.4533, 'eval_samples_per_second': 0.175, 'eval_steps_per_second': 0.175, 'epoch': 0.14}
+test_data size = 115
+Parameter 'function'=<function generate_summary at 0x000001B5989F5D30> of the transform datasets.arrow_dataset.Dataset._map_single couldn't be hashed properly, a random hash was used instead. Make sure your transforms and parameters are serializable with pickle or dill for the dataset fingerprinting and caching to work. If you reuse this transform, the caching mechanism will consider it to be different from the previous calls and recompute everything. This warning is only showed once. Subsequent hashing failures won't be showed.
+WARNING:datasets.fingerprint:Parameter 'function'=<function generate_summary at 0x000001B5989F5D30> of the transform datasets.arrow_dataset.Dataset._map_single couldn't be hashed properly, a random hash was used instead. Make sure your transforms and parameters are serializable with pickle or dill for the dataset fingerprinting and caching to work. If you reuse this transform, the caching mechanism will consider it to be different from the previous calls and recompute everything. This warning is only showed once. Subsequent hashing failures won't be showed.
+Map: 100%|███████████████████████████████████████████████████████████████████| 115/115 [10:44<00:00,  5.61s/ examples]
+example test data [0] = {'highlights': 'Membership gives the ICC jurisdiction over alleged crimes committed in Palestinian territories since last June .\nIsrael and the United States opposed the move, which could open the door to war crimes investigations against Israelis .', 'gold_ids': tensor([  101,  5779,  3957,  1996, 16461,  7360,  2058,  6884,  6997,  5462,
+         1999,  9302,  6500,  2144,  2197,  2238,  1012,  3956,  1998,  1996,
+         2142,  2163,  4941,  1996,  2693,  1010,  2029,  2071,  2330,  1996,
+         2341,  2000,  2162,  6997,  9751,  2114, 28363,  1012,   102,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0]), 'pred_ids': tensor([ 101, 1057, 1012, 1055, 1012, 1012, 1012, 1057, 1012, 1012, 1055, 1055,
+        1012, 1005, 1055, 2880, 2880, 2880, 2231, 2231, 4584, 1012, 2343, 8112,
+        2758, 8112, 1005, 1055, 2231, 2758, 2002, 2758, 2002, 2097, 2022, 1996,
+        2343, 1997, 2343, 1012, 2343, 1012, 8112, 2758, 2002, 2038, 5763, 5763,
+        2000, 1996, 2343, 1012, 5747, 1012, 2343, 2758, 8112, 2758, 2008, 2002,
+        2097, 2025, 2022, 1996, 2034, 2343, 1012,  102]), 'pred_summary': "u. s... u.. s s.'s official official official government government officials. president obama says obama's government says he says he will be the president of president. president. obama says he has promised promised to the president. bush. president says obama says that he will not be the first president."}
+test report = {'rouge1': 0.09479367064544314, 'rouge2': 0.007038657556108854, 'rougeL': 0.07338868408295864, 'rougeLsum': 0.07340406763659102}

@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbdfc030-7556-498d-b711-cb512a418ae9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Lab/01_Regex/guardian.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lab/01_Regex/misctext.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/NLP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NLP.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/_2025_2_27_20_43___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2025_2_27_20_43_取消提交了更改_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/01_Regex/01-02-regex_recognising_tokens.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/01_Regex/01-02-regex_recognising_tokens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab/01_Regex/MyPractice.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Lab/01_Regex/MyPractice.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab/02_/MyPractive.ipynb" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +79,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Master_Sem02\NLP\Lab\01_Regex\guardian_extracted" />
       <recent name="F:\Master_Sem02\NLP\Lab\01_Regex" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ym4c23\PycharmProjects\NLP\Lab" />
     </key>
   </component>
   <component name="RunManager" selected="Python.03-regex_lookahead_lookbehind">
@@ -189,8 +189,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-PY-243.21565.199" />
-        <option value="bundled-python-sdk-cab1f2013843-4ae2d6a61b08-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.21565.199" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.18034.82" />
+        <option value="bundled-python-sdk-975db3bf15a3-2767605e8bc2-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.18034.82" />
       </set>
     </attachedChunks>
   </component>
@@ -205,6 +205,7 @@
       <workItem from="1738940668524" duration="10000" />
       <workItem from="1739971674652" duration="21336000" />
       <workItem from="1740311012779" duration="29175000" />
+      <workItem from="1747397054624" duration="295000" />
     </task>
     <servers />
   </component>

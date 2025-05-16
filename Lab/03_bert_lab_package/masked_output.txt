@@ -1,0 +1,319 @@
+(nlp_labs_BERT) F:\Master_Sem02\NLP\Lab\03_bert_lab_package\bert_lab_package>python bert_masked_word.py
+cuda PYTORCH_CUDA_ALLOC_CONF =  garbage_collection_threshold:0.6,max_split_size_mb:256
+cuda memory (free  0 ; reserved  0 ; allocated  0 )
+device used = cuda
+D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\huggingface_hub\file_download.py:943: FutureWarning: resume_download is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use force_download=True.
+  warnings.warn(
+D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\huggingface_hub\file_download.py:943: FutureWarning: resume_download is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use force_download=True.
+  warnings.warn(
+Some weights of the model checkpoint at google-bert/bert-base-uncased were not used when initializing BertModel: ['cls.seq_relationship.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.seq_relationship.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.bias']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+input tensor size = torch.Size([1, 8])
+['[CLS]', 'hello', ',', 'my', 'dog', 'is', 'cute', '[SEP]']
+embedded input tensor size = torch.Size([1, 8, 768])
+embedded input tensor = tensor([[[ 1.6855e-01, -2.8577e-01, -3.2613e-01,  ..., -2.7571e-02,
+           3.8253e-02,  1.6400e-01],
+         [ 3.7386e-01, -1.5575e-02, -2.4561e-01,  ..., -3.1657e-02,
+           5.5144e-01, -5.2406e-01],
+         [ 4.6706e-04,  1.6225e-01, -6.4443e-02,  ...,  4.9443e-01,
+           6.9413e-01,  3.6286e-01],
+         ...,
+         [-4.7717e-01, -3.4798e-01, -4.3069e-01,  ...,  2.2722e-01,
+           4.8370e-01,  6.4643e-01],
+         [-1.6246e+00,  7.2719e-02,  7.5170e-01,  ..., -3.8820e-01,
+           7.0720e-01, -5.9501e-02],
+         [-2.5515e-01, -2.6706e-01,  7.9946e-02,  ..., -4.2870e-01,
+           3.4145e-01, -1.0551e-01]]], grad_fn=<NativeLayerNormBackward0>)
+
+
+model architecture (BERT without heads):
+BertModel(
+  (embeddings): BertEmbeddings(
+    (word_embeddings): Embedding(30522, 768, padding_idx=0)
+    (position_embeddings): Embedding(512, 768)
+    (token_type_embeddings): Embedding(2, 768)
+    (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (encoder): BertEncoder(
+    (layer): ModuleList(
+      (0-11): 12 x BertLayer(
+        (attention): BertAttention(
+          (self): BertSelfAttention(
+            (query): Linear(in_features=768, out_features=768, bias=True)
+            (key): Linear(in_features=768, out_features=768, bias=True)
+            (value): Linear(in_features=768, out_features=768, bias=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (output): BertSelfOutput(
+            (dense): Linear(in_features=768, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (intermediate): BertIntermediate(
+          (dense): Linear(in_features=768, out_features=3072, bias=True)
+          (intermediate_act_fn): GELUActivation()
+        )
+        (output): BertOutput(
+          (dense): Linear(in_features=3072, out_features=768, bias=True)
+          (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+  )
+  (pooler): BertPooler(
+    (dense): Linear(in_features=768, out_features=768, bias=True)
+    (activation): Tanh()
+  )
+)
+
+
+encoded output tensor:
+encoded output tensor size = torch.Size([1, 8, 768])
+encoded output tensor size = tensor([[[-0.1144,  0.1937,  0.1250,  ..., -0.3827,  0.2107,  0.5407],
+         [ 0.5308,  0.3207,  0.3665,  ..., -0.0036,  0.7579,  0.0388],
+         [-0.4877,  0.8849,  0.4256,  ..., -0.6976,  0.4458,  0.1231],
+         ...,
+         [-0.7003, -0.1815,  0.3297,  ..., -0.4838,  0.0680,  0.8901],
+         [-1.0355, -0.2567, -0.0317,  ...,  0.3197,  0.3999,  0.1795],
+         [ 0.6080,  0.2610, -0.3131,  ...,  0.0311, -0.6283, -0.1994]]],
+       grad_fn=<NativeLayerNormBackward0>)
+
+
+model architecture (BERT with pre-training heads):
+BertForPreTraining(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (cls): BertPreTrainingHeads(
+    (predictions): BertLMPredictionHead(
+      (transform): BertPredictionHeadTransform(
+        (dense): Linear(in_features=768, out_features=768, bias=True)
+        (transform_act_fn): GELUActivation()
+        (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      )
+      (decoder): Linear(in_features=768, out_features=30522, bias=True)
+    )
+    (seq_relationship): Linear(in_features=768, out_features=2, bias=True)
+  )
+)
+masked token prediction logits = tensor([[[ -7.8962,  -7.8105,  -7.7903,  ...,  -7.0694,  -7.1693,  -4.3590],
+         [ -8.4461,  -8.4401,  -8.5044,  ...,  -8.0625,  -7.9909,  -5.7160],
+         [-15.2953, -15.4727, -15.5865,  ..., -12.9857, -11.7038, -11.4293],
+         ...,
+         [-14.0628, -14.2536, -14.3645,  ..., -12.7151, -11.1621, -10.2317],
+         [-10.6576, -10.7892, -11.0402,  ..., -10.3233, -10.1578,  -3.7722],
+         [-11.3383, -11.4590, -11.1767,  ...,  -9.2152,  -9.5209,  -9.5571]]],
+       grad_fn=<ViewBackward0>)
+next seq prediction logits = tensor([[ 3.3474, -2.0613]], grad_fn=<AddmmBackward0>)
+Some weights of the model checkpoint at google-bert/bert-base-uncased were not used when initializing BertForMaskedLM: ['cls.seq_relationship.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BertForMaskedLM from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForMaskedLM from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+input ids =  tensor([[ 101, 1996, 3007, 1997, 2605, 2003,  103, 1012,  102]])
+input seq =  ['[CLS]', 'the', 'capital', 'of', 'france', 'is', '[MASK]', '.', '[SEP]']
+logits =  tensor([[[ -6.4346,  -6.4063,  -6.4097,  ...,  -5.7691,  -5.6326,  -3.7883],
+         [-14.0119, -14.7240, -14.2120,  ..., -11.6976, -10.7304, -12.7617],
+         [ -9.6561, -10.3125,  -9.7459,  ...,  -8.7782,  -6.6036, -12.6596],
+         ...,
+         [ -3.7861,  -3.8572,  -3.5644,  ...,  -2.5593,  -3.1093,  -4.3820],
+         [-11.6598, -11.4274, -11.9266,  ...,  -9.8772, -10.2103,  -4.7594],
+         [-11.7267, -11.7509, -11.8040,  ..., -10.5943, -10.9407,  -7.5151]]])
+masked token seq index (int)=  6
+size of predictions for marked token = torch.Size([30522])
+predictions for masked token = tensor([-3.7861, -3.8572, -3.5644,  ..., -2.5593, -3.1093, -4.3820])
+candidate (id, token, logit) = 0 [PAD] tensor(-3.7861)
+candidate (id, token, logit) = 100 [UNK] tensor(0.2131)
+candidate (id, token, logit) = 101 [CLS] tensor(-5.9932)
+candidate (id, token, logit) = 102 [SEP] tensor(-4.1928)
+candidate (id, token, logit) = 103 [MASK] tensor(-6.3016)
+candidate (id, token, logit) = 999 ! tensor(-0.3529)
+candidate (id, token, logit) = 1000 " tensor(0.4271)
+candidate (id, token, logit) = 2000 to tensor(0.7994)
+candidate (id, token, logit) = 3000 paris tensor(12.3461)
+candidate (id, token, logit) = 4000 tears tensor(-2.6369)
+candidate (id, token, logit) = 5000 knight tensor(-3.2225)
+candidate (id, token, logit) = 6000 peninsula tensor(-2.7738)
+most likely masked token prediction = paris
+Some weights of the model checkpoint at google-bert/bert-base-uncased were not used when initializing BertForNextSentencePrediction: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.transform.LayerNorm.bias']
+- This IS expected if you are initializing BertForNextSentencePrediction from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForNextSentencePrediction from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+
+
+model architecture (BERT with next sentence prediction head):
+BertForNextSentencePrediction(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (cls): BertOnlyNSPHead(
+    (seq_relationship): Linear(in_features=768, out_features=2, bias=True)
+  )
+)
+input seq (unrelated sents) =  ['[CLS]', 'in', 'italy', ',', 'pizza', 'served', 'in', 'formal', 'settings', ',', 'such', 'as', 'at', 'a', 'restaurant', ',', 'is', 'presented', 'un', '##sl', '##ice', '##d', '.', '[SEP]', 'the', 'sky', 'is', 'blue', 'due', 'to', 'the', 'shorter', 'wavelength', 'of', 'blue', 'light', '.', '[SEP]']
+loss = tensor(0.0001, grad_fn=<NllLossBackward0>)
+logits (logit true label, logit false label) = tensor([[-3.0729,  5.9056]], grad_fn=<AddmmBackward0>)
+next sent prediction = tensor(False)
+input seq (related sents) =  ['[CLS]', 'in', 'italy', 'they', 'cook', 'pizza', '.', '[SEP]', 'pizza', 'has', 'a', 'cheese', 'topping', '.', '[SEP]']
+loss = tensor(11.9092, grad_fn=<NllLossBackward0>)
+logits (logit true label, logit false label) = tensor([[ 6.0638, -5.8453]], grad_fn=<AddmmBackward0>)
+next sent prediction = tensor(True)
+
+
+model architecture (BERT with sequence classification/regression head):
+BertForSequenceClassification(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0-11): 12 x BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+            (intermediate_act_fn): GELUActivation()
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (dropout): Dropout(p=0.1, inplace=False)
+  (classifier): Linear(in_features=768, out_features=2, bias=True)
+)
+input seq =  ['[CLS]', 'hello', ',', 'my', 'dog', 'is', 'cute', '[SEP]']
+logits (logit 0 negative, logit 1 positive) = tensor([[-2.2095,  2.5760]])
+sentiment = tensor(True)
+predicted_class_id = 1
+imdb dataset = DatasetDict({
+    train: Dataset({
+        features: ['text', 'label'],
+        num_rows: 25000
+    })
+    test: Dataset({
+        features: ['text', 'label'],
+        num_rows: 25000
+    })
+})
+D:\Anaconda\envs\nlp_labs_BERT\lib\site-packages\huggingface_hub\file_download.py:943: FutureWarning: resume_download is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use force_download=True.
+  warnings.warn(
+encoded sample (batch of 5) = {'input_ids': tensor([[ 101, 1045, 2293,  ...,    0,    0,    0],
+        [ 101, 4276, 1996,  ...,    0,    0,    0],
+        [ 101, 2049, 1037,  ...,    0,    0,    0],
+        [ 101, 2732, 5790,  ..., 1012, 1008,  102],
+        [ 101, 2034, 2125,  ...,    0,    0,    0]]), 'token_type_ids': tensor([[0, 0, 0,  ..., 0, 0, 0],
+        [0, 0, 0,  ..., 0, 0, 0],
+        [0, 0, 0,  ..., 0, 0, 0],
+        [0, 0, 0,  ..., 0, 0, 0],
+        [0, 0, 0,  ..., 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 0, 0, 0],
+        [1, 1, 1,  ..., 1, 1, 1],
+        [1, 1, 1,  ..., 0, 0, 0]])}
+manual F1 calc = 1.0
+manual F1 calc (using logits) = {'f1': 1.0}
+evaluating dataset
+100%|██████████████████████████████████████████████████████████████████████████████| 3125/3125 [13:03<00:00,  3.99it/s]
+Eval of pretrained model on IMBD testset = {'eval_loss': 0.6227657198905945, 'eval_f1': 0.8721116692605322, 'eval_runtime': 784.4883, 'eval_samples_per_second': 31.868, 'eval_steps_per_second': 3.983}

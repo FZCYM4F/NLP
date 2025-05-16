@@ -1,0 +1,293 @@
+######################################################################
+#
+# (c) Copyright University of Southampton, 2025
+#
+# Copyright in this software belongs to University of Southampton,
+# Highfield, University Road, Southampton SO17 1BJ
+#
+# Created By : Stuart E. Middleton
+# Created Date : 2025/02/04
+# Project : Teaching
+# Restriction: Content for internal use at University of Southampton only
+#
+######################################################################
+
+#
+# CRF lab for NLP teaching modules (COMP3225, COMP6253)
+# This lab will explore machine learning model CRF for sequence labelling (NER task)
+# Lab does not need a GPU card (although conda setup included cuda so its common between labs). It has been tested with the ECS teaching lab machines.
+#
+
+# This lab will provide practical experience with named entity recongition (NER) software trained to label named entities (NE's) within English sentences
+# using a Conditional Random Field (CRF) model. You will learn how to use the CRF model to label NE's and adjust features to deliver better performance.
+# You will explore how changing the L1 regularization and using all possible transitions changes the learnt transition weights and thus the type of
+# patterns learnt. Finally you will use a randomized hyperparameter search to find an optimal set of hyperparameters for your CRF NER model.
+
+#
+# Resources for further reading
+# API       scikit learn CRF https://eli5.readthedocs.io/en/latest/tutorials/sklearn_crfsuite.html
+#           RandomizedSearchCV https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html
+# Tutorial  CRF https://github.com/TeamHG-Memex/sklearn-crfsuite/blob/master/docs/CoNLL2002.ipynb
+#           L1 and L2 regularization https://explained.ai/regularization/L1vsL2.html
+# Paper     CRF https://repository.upenn.edu/cis_papers/159/
+# Dataset   Ontonotes https://catalog.ldc.upenn.edu/LDC2013T19
+#
+
+
+#
+# linux install https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
+# Windows WSL (Windows subsystem linux)
+#     iSolutions page on WSL install https://sotonproduction.service-now.com/serviceportal?id=kb_article_view&sys_kb_id=49ae16091b103b00cdde86abee4bcb37
+#     must have admin rights to do this
+#     control panel -> turn windows features on or off->WSL = on
+#     search -> microsoft store -> install Ubuntu
+# ECS lab machines have WSL enabled by default but need Ubuntu installed
+#     open powershell
+#     wsl --set-default-version 2
+#     wsl --update
+#     wsl --install -d Ubuntu
+# windows native (not recommended or supported) https://docs.conda.io/en/latest/miniconda.html
+#
+
+###########################
+# WSL Installation Instructions for ECS teaching lab machines (including cuda for WSL)
+#
+
+#  open powershell
+wsl --set-default-version 2
+wsl --update # ECS machines have WSL already (do ignore this command)
+wsl --install -d Ubuntu
+
+# open Ubuntu App that has just been installed
+# Install the Cuda 12 toolkit
+
+# first remove current key
+sudo apt-key del 7fa2af80
+
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
+sudo dpkg -i cuda-repo-wsl-ubuntu-12-3-local_12.3.2-1_amd64.deb
+
+#Install the missing key
+sudo cp /var/cuda-repo-wsl-ubuntu-12-3-local/cuda-80CE8386-keyring.gpg /usr/share/keyrings/
+
+sudo cp /var/cuda-repo-wsl-ubuntu-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-3
+
+###########################
+# install conda
+#
+
+wget https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh
+chmod +x Anaconda3-2023.09-0-Linux-x86_64.sh
+
+# install anaconda to default /home/<user>/anaconda3
+./Anaconda3-2023.09-0-Linux-x86_64.sh
+conda list
+
+#
+# Setup a conda environment
+#
+
+# create env in conda
+conda create --yes --use-local -n nlp_labs python=3.9 -y
+conda init bash
+conda config --set auto_activate_base false
+conda activate nlp_labs
+conda deactivate
+
+# ubuntu update so it can find latest pip server URIs
+# for WSL updates use powershell 'wsl --update' command
+conda activate nlp_labs
+sudo apt-get update
+sudo apt -y purge python3-pip
+sudo python3 -m pip uninstall pip
+sudo apt -y install python3-pip --fix-missing
+
+# check your python version in conda (should be 3.9 for this lab)
+python3 -V
+
+# get cuda version
+nvidia-smi
+
+# Install PyTorch
+# if not ECS lab machines, make sure you have the right version of pytorch for your cuda using links below
+# https://pytorch.org/get-started/locally/
+# https://pytorch.org/get-started/previous-versions/
+conda install pytorch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+
+# check pytorch is using cuda ok
+# will be True if cuda installed OK
+python3 -c "import torch; print(torch.cuda.is_available())" 
+
+
+###########################
+# Install lab
+#
+
+# make your lab workdir (in this example its /data/crf_lab)
+sudo mkdir /data/
+sudo chown sem03 /data/
+mkdir /data/crf_lab
+cd /data/crf_lab
+
+# copy lab file crf_lab_package.zip file to workdir using SCP or similar
+# in wsl use a mount to access the c drive
+cp '/mnt/c/Users/sem03/lab/crf_lab_package.zip' /data/crf_lab
+
+conda activate nlp_labs
+cd /data/crf_lab
+sudo apt install unzip
+unzip crf_lab_package.zip
+
+# install python libs for this lab
+cd /data/crf_lab/crf_lab_package
+python3 -m pip install -r crf-requirements.txt
+
+# version of sklearn_crfsuite with legacy bug fixed
+python3 -m pip install pip install git+https://github.com/MeMartijn/updated-sklearn-crfsuite.git#egg=sklearn_crfsuite
+
+python3
+	>> import nltk
+	>> nltk.download()
+		d
+		stopwords
+		d
+		punkt
+		q
+	>> exit()
+python3 -m pip list
+
+
+###########################
+# Dataset pre-processing
+#
+
+We start with a function to load a parsed JSON formatted file with the ontonotes 5.0 dataset. The dataset is parsed and training and
+testset created, each a list of sentences constisting of lists of (token, POS_tag, NER_IOB_tag) tuples. IOB tagging is a scheme
+defining Begin, Inside, Outside tags for labels.
+
+For example "I like New York in the spring" might be tagged "O O B-LOC I-LOC O O O" for the named entity "New York".
+
+Ontonotes is an annotated dataset created from various genres of text (news, conversational telephone speech, weblogs, usenet
+newsgroups, broadcast, talk shows) in three languages (English, Chinese, and Arabic). Annotations include structural information
+(syntax and predicate argument structure) and shallow semantics (word sense linked to an ontology and coreference).
+We will only use a parsed version here with the words, POS tags and NER tags.
+
+#
+# Lab activity
+#
+
+(a) View the ontonotes_parsed.json file and read the LDC decription of the data, focussing on the NER tags that are present.
+(b) Open lab_crf_ner.py in an editor and look at the create_dataset() function. Observe how this function maps the Ontonotes NE tags into BIO format needed for our CRF model training.
+
+
+
+###########################
+# CRF model training
+#
+
+We will write a function to train the CRF model on the ontonotes corpus, and then run the trained model to compute a macro F1 score
+on the testset. First we load the corpus and then use the helper functions to generate lists of features for every token in the dataset.
+We curate a set of NE labels and remove the 'O' label. This is done because the majority of words are not named entities, and so 'O' tags
+severly imbalance the dataset. We want a CRF model that has a good F1 score across non-O tags, and if we left the 'O' tag in the F1 score
+would be dominated by the 'O' tag performance only.
+
+Next we train the CRF model and log the weights it has learnt. We then run the trained model on the testset and report the macro F1 score
+results. We also log information about the state transitions and position/negative weighted features as this can reveal what has really been learnt by the CRF model.
+
+#
+# Lab activity
+#
+
+(a) Look at the exec_task() function. this is used to execute all training and testing tasks.
+
+(b) Look at task1_word2features() which defined a basic feature template. This basic function creates a set of features for a token
+position within a sentence. This function uses only the word and POS tag, and will look ahead and behind by one token index position.
+
+(b) execute task1() to build the crf model and look at the baseline F1 score. Notice how top 10 features in the baseline are simple words or POS tags.
+
+python3 lab_crf_ner.py task1
+
+
+
+
+It is easy to overfit CRF models if the features provided are too specific to the corpus. Word shapes and morphemes are great ways to
+provide more generic features, which in turn allows the CRF model to learn patterns containing morphological features beyond the
+surface form of the sentence words.
+
+Think about how many ways you can write a sentence containing the named entity 'New York'. If you only used the surface form words
+in each sentence you would need an unbounded training set covering all possible ways to talk about 'New York'. Adding more generic
+morphological features allows the model to handle unseen surface forms much better.
+
+#
+# Lab activity
+#
+
+(a) Look at task2_word2features() which adds extra word shape features (uppercase, title, digits) and morphemes such as word affix
+(suffix) and POS affix (prefix).
+
+(b) execute task2() to build the crf model and look at how the F1 score improves, and the top 10 features include shape and suffix information.
+
+python3 lab_crf_ner.py task2
+
+
+
+Increasing the CRF model's L1 regularization (c1 parameter) will leave only more generic features. This should remove instance names
+such as 'Korea' and 'Iraq' from the feature set. With L1 regularization coefficients of most features should be driven to zero, so
+patterns reply on POS and word shape.
+
+#
+# Lab activity
+#
+
+(a) read the L1 and L2 regularization tutorial
+
+(b) execute task3() to build a CRF model with a c1 of 200 and look at the top 10 features being chosen for labels. See how the features
+are less reliant on particular words and more on word shape or POS tag.
+
+python3 lab_crf_ner.py task3
+
+
+
+Transitions like O -> I-PERSON should have large negative weights because they are impossible. but these transitions have zero weights,
+not negative weights, both in heavily the regularized model and the initial model. The reason they are zero is that crfsuite has not
+seen these transitions in training data, and assumed there is no need to learn weights for them, to save some computation time.
+
+This is the default behavior. It is possible to turn it off using sklearn_crfsuite.CRF all_possible_transitions option.
+
+#
+# Lab activity
+#
+
+(a) review the scikit learn CRF API
+
+(b) execute task4() to build a CRF model with all_possible_transitions = True and look at the negative weighting of
+O -> I-xxx labels. See how these transitions are now explicitly negatively weighted.
+
+python3 lab_crf_ner.py task4
+
+###########################
+# hyperparam search for CRF
+# (LAB SIGNOFF) show screen shot of the optimal hyperparams after RandomizedSearchCV - task (b)
+#
+
+Choosing the right hyperparameters can be very hard to know at design time. Usually it requires some experimentation to choose the best
+ones. Using a grid or randomized search strategy is a good way to automatically explore the hyperparameter space and idcentify the best
+hyperparameter settings. If you already have a hypothesis for what parameter ranges might work best, simple constrain the search space
+to focus on the areas you think should work best.
+
+#
+# Lab activity
+#
+
+(a) review the RandomizedSearchCV API
+
+(b) execute task5() to build a CRF model using a randomized search to find the best hyperparameters (c1, c2) for the crf model. the config uses 3 folds and 50 candidates per fold, but you can do more if you want a longer but more exhaustive search.
+
+(c) Once optimal params are known, hard code them and change max_iter and max_files (e.g. max_files = 150) so you are training on more files. See the F1 score improve.
+
+python3 lab_crf_ner.py task5
+
